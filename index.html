@@ -7,7 +7,7 @@
 <style>
   body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
     height: 100vh;
     overflow: hidden;
@@ -19,20 +19,14 @@
   .card {
     background: white;
     padding: 30px;
-    border-radius: 25px;
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     max-width: 360px;
+    z-index: 2;
   }
 
-  h1 {
-    color: #e60073;
-  }
-
-  p {
-    font-size: 18px;
-  }
+  h1 { color: #e60073; }
 
   .buttons {
     position: relative;
@@ -41,120 +35,84 @@
   }
 
   button {
-    padding: 12px 30px;
-    font-size: 16px;
+    padding: 10px 25px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     position: absolute;
+    font-size: 16px;
   }
 
-  #yes {
-    background: #ff3366;
-    color: white;
-    left: 40px;
-  }
+  #yes { background: #ff3366; color: white; left: 40px; }
+  #no  { background: #ccc; right: 40px; }
 
-  #no {
-    background: #ccc;
-    right: 40px;
-  }
+  #dance { display: none; margin-top: 15px; }
 
-  #rose {
-    display: none;
-    margin-top: 20px;
-  }
-
-  #rose img {
-    width: 220px;
-  }
-
-  /* Floating hearts */
   .heart {
     position: absolute;
-    color: red;
-    font-size: 20px;
+    font-size: 18px;
     animation: float 6s linear infinite;
   }
 
   @keyframes float {
-    0% {
-      transform: translateY(100vh);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-10vh);
-      opacity: 0;
-    }
+    from { transform: translateY(100vh); opacity: 1; }
+    to   { transform: translateY(-10vh); opacity: 0; }
   }
-
-  .music-note {
-    font-size: 14px;
-    color: #777;
-    margin-top: 10px;
-  }
-
 </style>
 </head>
 
 <body>
 
-<!-- YouTube Aashiqui 2 Song (Autoplay Muted) -->
-<iframe
-  width="0"
-  height="0"
-  src="https://www.youtube.com/embed/hoNb6HuNmU0?autoplay=1&mute=1&loop=1&playlist=hoNb6HuNmU0"
-  frameborder="0"
-  allow="autoplay">
-</iframe>
+<!-- LOCAL MUSIC FILE -->
+<audio id="music" preload="auto" loop>
+  <source src="aashiqui_2.mp3" type="audio/mpeg">
+</audio>
 
-<div class="card">
+<div class="card" id="card">
   <h1>💖 Happy Valentine’s Day 💖</h1>
-  <p><strong>Pooja</strong>, I love you ❤️</p>
-  <p>Will you love me forever?</p>
+  <p id="question"><b>Pooja</b>, I love you ❤️<br>Will you love me forever?</p>
 
-  <div class="buttons">
+  <div class="buttons" id="buttons">
     <button id="yes" onclick="showLove()">Yes 💕</button>
     <button id="no">No 😜</button>
   </div>
 
-  <div id="rose">
-    <p>You made my heart yours 🌹❤️</p>
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Red Roses">
-  </div>
-
-  <div class="music-note">
-    🎵 Tap anywhere to unmute the song
+  <div id="dance">
+    <p>Forever starts now 💃🕺❤️</p>
+    <!-- Lightweight dancing GIF -->
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="250">
   </div>
 </div>
 
 <script>
-  // No button runs away
+  const music = document.getElementById("music");
   const noBtn = document.getElementById("no");
+  const question = document.getElementById("question");
+  const buttons = document.getElementById("buttons");
+  const danceDiv = document.getElementById("dance");
 
+  // No button runs away until Yes is clicked
   noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = Math.random() * 80 + "vw";
+    noBtn.style.top  = Math.random() * 80 + "vh";
   });
 
   function showLove() {
-    document.getElementById("rose").style.display = "block";
+    question.style.display = "none";   // Hide the question
+    buttons.style.display = "none";    // Hide both buttons
+    danceDiv.style.display = "block";  // Show dancing GIF + message
+    music.play();                      // Start music
   }
 
-  // Floating hearts generator
+  // Floating hearts
   setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 6000);
-  }, 300);
-
+  }, 400);
 </script>
 
 </body>
