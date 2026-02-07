@@ -79,8 +79,8 @@
 
   <div id="dance">
     <p>Forever starts now 💃🕺❤️</p>
-    <!-- Lightweight dancing GIF -->
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="250">
+    <!-- Dancing GIF -->
+    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" width="250">
   </div>
 </div>
 
@@ -91,11 +91,18 @@
   const buttons = document.getElementById("buttons");
   const danceDiv = document.getElementById("dance");
 
-  // No button runs away until Yes is clicked
-  noBtn.addEventListener("mouseover", () => {
+  // Function to move No button randomly
+  function moveNoButton() {
     noBtn.style.left = Math.random() * 80 + "vw";
     noBtn.style.top  = Math.random() * 80 + "vh";
-  });
+  }
+
+  // Desktop events
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("mousedown", moveNoButton);
+
+  // Mobile events
+  noBtn.addEventListener("touchstart", moveNoButton);
 
   function showLove() {
     question.style.display = "none";   // Hide the question
