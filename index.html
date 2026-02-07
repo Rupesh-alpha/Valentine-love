@@ -1,126 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>For Pooja ❤️</title>
-
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    max-width: 360px;
-    z-index: 2;
-  }
-
-  h1 { color: #e60073; }
-
-  .buttons {
-    position: relative;
-    height: 80px;
-    margin-top: 20px;
-  }
-
-  button {
-    padding: 10px 25px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    position: absolute;
-    font-size: 16px;
-  }
-
-  #yes { background: #ff3366; color: white; left: 40px; }
-  #no  { background: #ccc; right: 40px; }
-
-  #dance { display: none; margin-top: 15px; }
-
-  .heart {
-    position: absolute;
-    font-size: 18px;
-    animation: float 6s linear infinite;
-  }
-
-  @keyframes float {
-    from { transform: translateY(100vh); opacity: 1; }
-    to   { transform: translateY(-10vh); opacity: 0; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Valentine Love</title>
 </head>
-
 <body>
-
-<!-- LOCAL MUSIC FILE -->
-<audio id="music" preload="auto" loop>
-  <source src="aashiqui_2.mp3" type="audio/mpeg">
-</audio>
-
-<div class="card" id="card">
-  <h1>💖 Happy Valentine’s Day 💖</h1>
-  <p id="question"><b>Pooja</b>, I love you ❤️<br>Will you love me forever?</p>
-
-  <div class="buttons" id="buttons">
-    <button id="yes" onclick="showLove()">Yes 💕</button>
-    <button id="no">No 😜</button>
-  </div>
-
-  <div id="dance">
-    <p>Forever starts now 💃🕺❤️</p>
-    <!-- Dancing GIF -->
-    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" width="250">
-  </div>
-</div>
-
-<script>
-  const music = document.getElementById("music");
-  const noBtn = document.getElementById("no");
-  const question = document.getElementById("question");
-  const buttons = document.getElementById("buttons");
-  const danceDiv = document.getElementById("dance");
-
-  // Function to move No button randomly
-  function moveNoButton() {
-    noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top  = Math.random() * 80 + "vh";
-  }
-
-  // Desktop events
-  noBtn.addEventListener("mouseover", moveNoButton);
-  noBtn.addEventListener("mousedown", moveNoButton);
-
-  // Mobile events
-  noBtn.addEventListener("touchstart", moveNoButton);
-
-  function showLove() {
-    question.style.display = "none";   // Hide the question
-    buttons.style.display = "none";    // Hide both buttons
-    danceDiv.style.display = "block";  // Show dancing GIF + message
-    music.play();                      // Start music
-  }
-
-  // Floating hearts
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }, 400);
-</script>
-
+    <h1>Happy Valentine’s Day!</h1>
+    <audio controls>
+        <source src="assets/audio/love-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="button-container">
+        <button class="yes-button">Yes</button>
+        <button class="no-button">No</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
