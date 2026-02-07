@@ -1,105 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For My Valentine ❤️</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<title>For Pooja ❤️</title>
 
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      max-width: 350px;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    h1 {
-      color: #e60073;
-    }
+  .card {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    z-index: 2;
+    max-width: 360px;
+  }
 
-    p {
-      font-size: 18px;
-    }
+  h1 {
+    color: #e60073;
+  }
 
-    .buttons {
-      margin-top: 20px;
-      position: relative;
-      height: 80px;
-    }
+  p {
+    font-size: 18px;
+  }
 
-    button {
-      padding: 10px 25px;
-      font-size: 16px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      position: absolute;
-    }
+  .buttons {
+    position: relative;
+    height: 80px;
+    margin-top: 20px;
+  }
 
-    #yes {
-      background-color: #ff4d6d;
-      color: white;
-      left: 50px;
-    }
+  button {
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+  }
 
-    #no {
-      background-color: #ccc;
-      right: 50px;
-    }
+  #yes {
+    background: #ff3366;
+    color: white;
+    left: 40px;
+  }
 
-    #rose {
-      display: none;
-      margin-top: 20px;
-    }
+  #no {
+    background: #ccc;
+    right: 40px;
+  }
 
-    img {
-      width: 200px;
-      border-radius: 10px;
+  #rose {
+    display: none;
+    margin-top: 20px;
+  }
+
+  #rose img {
+    width: 220px;
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh);
+      opacity: 1;
     }
-  </style>
+    100% {
+      transform: translateY(-10vh);
+      opacity: 0;
+    }
+  }
+
+  .music-note {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+  }
+
+</style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>💖 Happy Valentine’s Day 💖</h1>
-    <p>I love you ❤️</p>
-    <p>Will you love me?</p>
+<!-- YouTube Aashiqui 2 Song (Autoplay Muted) -->
+<iframe
+  width="0"
+  height="0"
+  src="https://www.youtube.com/embed/hoNb6HuNmU0?autoplay=1&mute=1&loop=1&playlist=hoNb6HuNmU0"
+  frameborder="0"
+  allow="autoplay">
+</iframe>
 
-    <div class="buttons">
-      <button id="yes" onclick="showLove()">Yes 💕</button>
-      <button id="no">No 😜</button>
-    </div>
+<div class="card">
+  <h1>💖 Happy Valentine’s Day 💖</h1>
+  <p><strong>Pooja</strong>, I love you ❤️</p>
+  <p>Will you love me forever?</p>
 
-    <div id="rose">
-      <p>Yayyy! 🌹 For you my love ❤️</p>
-      <img src="https://media.giphy.com/media/3oz8xKcKXfHBER2MpO/giphy.gif" alt="Roses">
-    </div>
+  <div class="buttons">
+    <button id="yes" onclick="showLove()">Yes 💕</button>
+    <button id="no">No 😜</button>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("no");
+  <div id="rose">
+    <p>You made my heart yours 🌹❤️</p>
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Red Roses">
+  </div>
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
+  <div class="music-note">
+    🎵 Tap anywhere to unmute the song
+  </div>
+</div>
 
-    function showLove() {
-      document.getElementById("rose").style.display = "block";
-    }
-  </script>
+<script>
+  // No button runs away
+  const noBtn = document.getElementById("no");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  function showLove() {
+    document.getElementById("rose").style.display = "block";
+  }
+
+  // Floating hearts generator
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+
+</script>
 
 </body>
 </html>
