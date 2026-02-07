@@ -3,19 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Valentine Love</title>
+    <title>For Pooja ❤️</title>
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+    
+      .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        max-width: 360px;
+        z-index: 2;
+        position: relative;
+      }
+    
+      h1 { 
+        color: #e60073; 
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: #333;
+        margin: 15px 0;
+      }
+    
+      .buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    
+      button {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        touch-action: manipulation;
+        user-select: none;
+      }
+
+      button:active {
+        transform: scale(0.95);
+      }
+    
+      #yes { 
+        background: #ff3366; 
+        color: white;
+        flex: 1;
+        min-width: 120px;
+      }
+
+      #yes:hover {
+        background: #ff1a50;
+        box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+      }
+    
+      #no  { 
+        background: #ccc; 
+        color: #333;
+        flex: 1;
+        min-width: 120px;
+        position: relative;
+      }
+
+      #no:hover {
+        background: #bbb;
+      }
+    
+      #dance { 
+        display: none; 
+        margin-top: 15px; 
+      }
+
+      #dance p {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+
+      #dance img {
+        max-width: 100%;
+        height: auto;
+        max-height: 300px;
+        border-radius: 10px;
+      }
+    
+      .heart {
+        position: fixed;
+        font-size: 18px;
+        animation: float 6s linear infinite;
+        pointer-events: none;
+      }
+    
+      @keyframes float {
+        from { transform: translateY(100vh); opacity: 1; }
+        to   { transform: translateY(-10vh); opacity: 0; }
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        body {
+          padding: 20px;
+        }
+
+        .card {
+          padding: 20px;
+          max-width: 90vw;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        .buttons {
+          flex-direction: row;
+          gap: 10px;
+          margin-top: 25px;
+        }
+
+        button {
+          padding: 12px 20px;
+          font-size: 14px;
+          flex: 1;
+          min-width: 100px;
+        }
+
+        #dance img {
+          max-width: 90%;
+          max-height: 250px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 15px;
+          max-width: 95vw;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 13px;
+        }
+
+        button {
+          padding: 10px 15px;
+          font-size: 13px;
+        }
+
+        #dance p {
+          font-size: 16px;
+        }
+
+        #dance img {
+          max-height: 200px;
+        }
+      }
+    </style>
 </head>
+
 <body>
-    <h1>Happy Valentine’s Day!</h1>
-    <audio controls>
-        <source src="assets/audio/love-song.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <div class="button-container">
-        <button class="yes-button">Yes</button>
-        <button class="no-button">No</button>
-    </div>
-    <script src="script.js"></script>
+
+<!-- AUDIO ELEMENT -->
+<audio id="music" preload="auto" loop>
+  <source src="Hum Tere Bin Ab Reh Nahi Sakte - Tum Hi Ho _ Arijit Singh.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<div class="card" id="card">
+  <h1>💖 Happy Valentine's Day 💖</h1>
+  <p id="question"><b>Pooja</b>, I love you ❤️<br>Will you love me forever?</p>
+
+  <div class="buttons" id="buttons">
+    <button id="yes" onclick="showLove()">Yes 💕</button>
+    <button id="no">No 😜</button>
+  </div>
+
+  <div id="dance">
+    <p>Forever starts now 💃🕺❤️</p>
+    <!-- Dancing GIF -->
+    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Dancing">
+  </div>
+</div>
+
+<script>
+  const music = document.getElementById("music");
+  const noBtn = document.getElementById("no");
+  const question = document.getElementById("question");
+  const buttons = document.getElementById("buttons");
+  const danceDiv = document.getElementById("dance");
+  const card = document.getElementById("card");
+
+  let noButtonDisabled = false;
+
+  // Function to move No button randomly (stays within card area)
+  function moveNoButton(e) {
+    if (noButtonDisabled) return;
+    
+    // Prevent the action that triggered the move
+    e.preventDefault();
+    e.stopPropagation();
+
+    const card = document.getElementById("card");
+    const cardRect = card.getBoundingClientRect();
+    
+    // Generate random position within card
+    const randomX = Math.random() * (cardRect.width - noBtn.offsetWidth);
+    const randomY = Math.random() * (cardRect.height - noBtn.offsetHeight);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+  }
+
+  // Desktop events
+  noBtn.addEventListener("mouseover", moveNoButton);
+  
+  // Mobile events with better handling
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton(e);
+  }, { passive: false });
+
+  // Prevent actual click on No button
+  noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    moveNoButton(e);
+  });
+
+  function showLove() {
+    noButtonDisabled = true;
+    question.style.display = "none";
+    buttons.style.display = "none";
+    danceDiv.style.display = "block";
+    
+    // Play music with error handling
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log("Autoplay prevented:", error);
+        // Allow user to manually start music if needed
+      });
+    }
+  }
+
+  // Floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 400);
+</script>
+
 </body>
 </html>
